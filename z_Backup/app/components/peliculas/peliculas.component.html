@@ -1,0 +1,49 @@
+<app-slider 
+    [Nombre]="'Peliculass'"
+    [size]="'small'"
+></app-slider>
+
+<div class="center">
+
+    <section id="content">
+
+        <div id="favorita" *ngIf="favorita">
+            <h2>
+                Pelicula favorita: {{favorita.title | uppercase}}
+            </h2>
+            <h4>{{favorita.year}}</h4>
+            <!-- <h5>{{this.fecha | date: 'dd/MM/yyyy'}}</h5> -->
+            <h5>{{this.fecha | date: 'dd/MM/yyyy' | espar}}</h5>
+        </div>
+        <h1 class="subheader">Peliculas</h1>
+
+        <p>{{titulo}}</p>
+        <button (click)="cambiarTitulo()">Pulsame</button>
+
+        <hr>
+
+        <h2>Mostrar primera pelicula</h2>
+        <p>{{peliculas[0].title}}</p>
+        <img class="FotoPeli" src="{{peliculas[0].image}}">
+
+        <hr>
+
+        <h2>Numero de peliculas</h2>
+        <p>{{peliculas.length}}</p>
+        <p *ngIf="peliculas.length <= 3">Hay menos de 3 peliculas</p>
+
+        <hr>
+
+        <h2 class="subheader">Todas las peliculas</h2>
+        <div *ngIf="peliculas">
+            <div *ngFor="let pelicula of peliculas; let i = index">
+                <app-pelicula [pelicula]="pelicula" [i]="i" (MarcarFavorita)="mostrarFavorita($event)"></app-pelicula>
+            </div>
+        </div>
+
+
+    </section>
+
+    <app-sidebar></app-sidebar>
+
+</div>
